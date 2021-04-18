@@ -1,5 +1,8 @@
 package huangxun.live.community.dto;
 
+import lombok.Data;
+
+@Data
 public class GithubUser {
     private String name;
 
@@ -7,29 +10,5 @@ public class GithubUser {
 
     private String bio;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-
+    private String avatarUrl; //fastJSON可以自动把下划线标识映射到驼峰属性
 }
