@@ -1,5 +1,6 @@
 package huangxun.live.community.mapper;
 
+import huangxun.live.community.dto.QuestionDTO;
 import huangxun.live.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -19,4 +20,14 @@ public interface QuestionMapper {
 
     @Select("select count(1) from question")
     Integer count();
+
+    //MyBatis不支持重载
+    @Select("select * from question where creator = #{userId} limit #{offset}, #{size}")
+    List<Question> listByUserId(@Param(value = "userId") Integer userId, Integer offset, Integer size);
+
+    @Select("select count(1) from question where creator = #{userId}")
+    Integer countByUserId(@Param(value = "userId") Integer userId);
+
+    @Select("select * from question where id = #{id}")
+    Question getById(@Param(value = "id") Integer id);
 }
