@@ -4,6 +4,7 @@ import huangxun.live.community.dto.PaginationDTO;
 import huangxun.live.community.dto.QuestionDTO;
 import huangxun.live.community.exception.CustomizeErrorCode;
 import huangxun.live.community.exception.CustomizeException;
+import huangxun.live.community.mapper.QuestionExtMapper;
 import huangxun.live.community.mapper.QuestionMapper;
 import huangxun.live.community.mapper.UserMapper;
 import huangxun.live.community.model.Question;
@@ -25,6 +26,9 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public PaginationDTO list(Integer page, Integer size) {
 
@@ -144,5 +148,12 @@ public class QuestionService {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
+    }
+
+    public void incView(Integer id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
