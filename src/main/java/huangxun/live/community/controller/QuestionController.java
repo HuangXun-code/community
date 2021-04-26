@@ -1,15 +1,17 @@
 package huangxun.live.community.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
+import huangxun.live.community.dto.CommentDTO;
 import huangxun.live.community.dto.QuestionDTO;
-import huangxun.live.community.mapper.QuestionMapper;
-import huangxun.live.community.mapper.UserMapper;
+import huangxun.live.community.enums.CommentTypeEnum;
+import huangxun.live.community.service.CommentService;
 import huangxun.live.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 /**
  * @author :黄珣
@@ -22,13 +24,19 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private CommentService commentService;
+
     @GetMapping("/question/{id}")
-    public String question(@PathVariable(name = "id") Integer id,
-                           Model model){
+    public String question(@PathVariable(name = "id") Long id, Model model){
         QuestionDTO questionDTO = questionService.getById(id);
+        List<QuestionDTO> relatedQuestions = questionService.selectRelated(questionDTO);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //累加阅读数
         questionService.incView(id);
         model.addAttribute("question", questionDTO);
+        model.addAttribute("comments", comments);
+        model.addAttribute("relatedQuestions", relatedQuestions);
         return "question";
     }
 }

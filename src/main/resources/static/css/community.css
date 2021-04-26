@@ -12,9 +12,18 @@ body {
     margin-bottom: 15px;
 }
 
+.btn-comment {
+    float: right;
+    margin-bottom: 10px;
+}
+
 .media-object {
     width: 40px;
     height: 40px;
+}
+
+.media-body {
+    padding-top: 10px;
 }
 
 .text-desc {
@@ -28,11 +37,101 @@ body {
     margin-top: 15px;
 }
 
+.question-title {
+    margin-top: 25px;
+}
+
+.question-tag {
+    margin-right: 5px;
+}
+
+.question-related {
+    line-height: 20px;
+    font-size: 12px;
+    margin-left: 0;
+    list-style: none;
+    padding-left: 0;
+}
+
 .community-menu {
     font-size: 13px;
     color: #999;
+    margin-bottom: 15px;
+}
+
+.question-mine {
+    width: 100%;
+}
+
+.publish-tag-tab {
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.publish-tag-tab .label-info {
+    margin: 5px 5px;
+    display: inline-block;
+    white-space: normal;
 }
 
 .jumbotron {
     margin: 50px;
 }
+
+/*代表上和下都距离10px*/
+.comment {
+    margin: 10px 0;
+}
+
+.comments {
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.sub-comments {
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #eee;
+    padding-top: 15px;
+    margin-bottom: 15px;
+}
+
+.sub-comments .btn {
+    margin: 10px 0;
+}
+
+.comment-sp {
+    margin-top: 0;
+}
+
+.menu {
+    color: #999;
+    margin-top: 5px;
+}
+
+/*设置层级，因为以后的icon可能会有多个，所以只设置在这一层里的icon起作用*/
+.menu .icon {
+    margin-right: 6px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .comment-icon {
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.menu .comment-icon:hover {
+    color: #499ef3
+}
+
+.menu .active {
+    color: #499ef3;
+}
+
+.menu .icon:hover {
+    color: #499ef3;
+}
+

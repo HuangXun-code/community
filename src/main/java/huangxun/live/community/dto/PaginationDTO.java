@@ -13,8 +13,8 @@ import java.util.List;
  * @create :2021-04-18 15:54:00
  */
 @Data
-public class PaginationDTO {  //PageHelper
-    private List<QuestionDTO> questions;
+public class PaginationDTO<T> {  //PageHelper
+    private List<T> data;
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;

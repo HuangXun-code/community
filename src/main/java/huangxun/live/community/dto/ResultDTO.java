@@ -4,15 +4,18 @@ import huangxun.live.community.exception.CustomizeErrorCode;
 import huangxun.live.community.exception.CustomizeException;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author :黄珣
  * @description :增强返回结果
  * @create :2021-04-21 22:21:00
  */
 @Data
-public class ResultDTO {
+public class ResultDTO<T> {
     private String message;
     private Integer code;
+    private T data;
 
     public static ResultDTO errorOf(Integer code, String message) {
         ResultDTO resultDTO = new ResultDTO();
@@ -36,5 +39,11 @@ public class ResultDTO {
         return resultDTO;
     }
 
-
+    public static <T> ResultDTO okOf(T t) {
+        ResultDTO resultDTO = new ResultDTO();
+        resultDTO.setCode(200);
+        resultDTO.setMessage("请求成功");
+        resultDTO.setData(t);
+        return resultDTO;
+    }
 }

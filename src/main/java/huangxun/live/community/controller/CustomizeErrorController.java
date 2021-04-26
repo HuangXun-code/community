@@ -1,5 +1,6 @@
 package huangxun.live.community.controller;
 
+import huangxun.live.community.exception.CustomizeErrorCode;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -7,15 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.print.attribute.standard.Media;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
+
 
 /**
  * @author :黄珣
- * @description : 定义该类处理其他通用的异常情况
+ * @description : 定义该类处理其他通用的异常情况，像是4xx和5xx这样的非业务异常
  * @create :2021-04-21 16:05:00
  */
 @Controller
@@ -31,10 +29,10 @@ public class CustomizeErrorController implements ErrorController {
                                   Model model) {
         HttpStatus status = getStatus(request);
         if (status.is4xxClientError()) {
-            model.addAttribute("message", "你这个请求错了吧，要不然换个姿势？");
+            model.addAttribute("message", CustomizeErrorCode.REQUEST_WRONG.getMessage());
         }
         if (status.is5xxServerError()) {
-            model.addAttribute("message", "服务冒烟了，要不然你稍后再试试！！！");
+            model.addAttribute("message", CustomizeErrorCode.SYS_ERROR.getMessage());
         }
         return new ModelAndView("error");
     }

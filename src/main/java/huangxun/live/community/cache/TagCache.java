@@ -1,0 +1,38 @@
+package huangxun.live.community.cache;
+
+import huangxun.live.community.dto.TagDTO;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * @author :黄珣
+ * @description : 定义标签，应该写入数据库
+ * @create :2021-04-25 21:37:00
+ */
+public class TagCache {
+    public static List<TagDTO> get() {
+        List<TagDTO> tagDTOS = new ArrayList<>();
+        TagDTO program = new TagDTO();
+        program.setCategoryName("开发语言");
+        program.setTags(Arrays.asList("js", "php", "css", "html", "java", "node"));
+        tagDTOS.add(program);
+
+        TagDTO framework = new TagDTO();
+        framework.setCategoryName("平台框架");
+        framework.setTags(Arrays.asList("spring", "django", "flask", "express", "laravel", "yii"));
+        tagDTOS.add(framework);
+        return tagDTOS;
+    }
+
+    public static String filterInvalid(String tags) {
+        String[] split = StringUtils.split(tags, ",");
+        List<TagDTO> tagDTOS = get();
+        List<String> tagList = tagDTOS.stream().flatMap(tag -> tag.getTags().stream()).collect(Collectors.toList());
+        String invalid = Arrays.stream(split).filter(t -> !tagList.contains(t)).collect(Collectors.joining(","));
+        return invalid;
+    }
+}

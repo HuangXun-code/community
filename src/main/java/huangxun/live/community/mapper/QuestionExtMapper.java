@@ -10,4 +10,8 @@ import java.util.List;
 //由于mapper和数据库语句需要重复写而引入mybatis generator
 public interface QuestionExtMapper {
     int incView(Question record);
+
+    int incCommentCount(Question record);
+
+    List<Question> selectRelated(Question question);
 }
