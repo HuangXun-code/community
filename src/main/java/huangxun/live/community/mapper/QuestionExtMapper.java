@@ -1,5 +1,6 @@
 package huangxun.live.community.mapper;
 
+import huangxun.live.community.dto.QuestionQueryDTO;
 import huangxun.live.community.model.Question;
 import huangxun.live.community.model.QuestionExample;
 import org.apache.ibatis.annotations.Param;
@@ -14,4 +15,8 @@ public interface QuestionExtMapper {
     int incCommentCount(Question record);
 
     List<Question> selectRelated(Question question);
+
+    Integer countBySearch(QuestionQueryDTO questionQueryDTO);
+
+    List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
 }
